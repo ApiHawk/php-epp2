@@ -36,6 +36,7 @@ class Client
     protected $debug;
     protected $connect_timeout;
     protected $timeout;
+    protected $closeConnOnDestruct = true;
 
     public function __construct(array $config)
     {
@@ -100,17 +101,23 @@ class Client
         } else {
             $this->timeout = 8;
         }
+
+        if (isset($config['close_conn_on_destruct'])) {
+            $this->closeConnOnDestruct = $config['close_conn_on_destruct'];
+        }
     }
 
     public function __destruct()
     {
-        $this->close();
+        if ($this->closeConnOnDestruct) {
+            $this->close();
+        }
     }
 
     /**
      * Open a new connection to the EPP server
      */
-    public function connect()
+    public function connect($loginAfterGreeting = true)
     {
         if ($this->ssl) {
             $proto = 'ssl';
@@ -156,7 +163,9 @@ class Client
         $greeting = $this->getFrame();
 
         // login
-        $this->login();
+        if ($loginAfterGreeting) {
+            $this->login();
+        }
 
         // return greeting
         return $greeting;
