@@ -17,6 +17,7 @@ use AfriCC\EPP\AbstractFrame;
 abstract class Command extends AbstractFrame implements TransactionAwareInterface
 {
     protected $clTRID;
+    protected $svTRID;
 
     public function setClientTransactionId($clTRID)
     {
@@ -27,5 +28,17 @@ abstract class Command extends AbstractFrame implements TransactionAwareInterfac
     public function getClientTransactionId()
     {
         return $this->clTRID;
+    }
+
+
+    public function setServiceTransactionId(string $svTRID)
+    {
+        $this->svTRID = $svTRID;
+        $this->set('//epp:epp/epp:command/epp:cvTRID', $svTRID);
+    }
+
+    public function getServerTransactionId()
+    {
+        return $this->svTRID;
     }
 }
