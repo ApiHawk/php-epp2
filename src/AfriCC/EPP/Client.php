@@ -37,6 +37,7 @@ class Client
     protected $connect_timeout;
     protected $timeout;
     protected $closeConnOnDestruct = true;
+    protected $loginResponse = null;
 
     public function __construct(array $config)
     {
@@ -164,7 +165,8 @@ class Client
 
         // login
         if ($loginAfterGreeting) {
-            $this->login();
+            $loginResp = $this->login();
+            $this->setLoginResponse($loginResp);
         }
 
         // return greeting
@@ -269,6 +271,8 @@ class Client
         } elseif ($response->code() !== 1000) {
             throw new Exception($response->message(), $response->code());
         }
+
+        return $response;
     }
 
     protected function log($message, $color = '0;32')
@@ -395,5 +399,21 @@ class Client
         }
 
         return $pos;
+    }
+
+    /**
+     * @param object $loginResp
+     */
+    private function setLoginResponse($loginResp)
+    {
+        $this->loginResponse = $loginResp;
+    }
+
+    /**
+     * @return null
+     */
+    public function getLoginResponse()
+    {
+        return $this->loginResponse;
     }
 }
