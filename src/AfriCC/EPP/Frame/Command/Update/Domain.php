@@ -151,4 +151,17 @@ class Domain extends UpdateCommand
 
         return $pw;
     }
+
+    public function changePwRegistrantTransfer($pwregistranttransfer = null)
+    {
+        if ($pwregistranttransfer === null) {
+            $pwregistranttransfer = Random::auth(12);
+        }
+
+        $this->set(
+            'domain:chg/domain:authInfo/domain:pwregistranttransfer', $pwregistranttransfer
+        );
+
+        return $pwregistranttransfer;
+    }
 }
