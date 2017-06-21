@@ -38,6 +38,7 @@ class Client
     protected $timeout;
     protected $closeConnOnDestruct = true;
     protected $loginResponse = null;
+    protected $max_chunk_size_protection = true;
 
     public function __construct(array $config)
     {
@@ -105,6 +106,11 @@ class Client
 
         if (isset($config['close_conn_on_destruct'])) {
             $this->closeConnOnDestruct = $config['close_conn_on_destruct'];
+        }
+
+        if (isset($config['max_chunk_size_protection'])) {
+            $this->max_chunk_size_protection
+                = $config['max_chunk_size_protection'];
         }
     }
 
@@ -358,7 +364,7 @@ class Client
                 // Some servers don't like alot of data, so keep it small per chunk
                 $wlen = $length - $pos;
 
-                if ($wlen > 1024) {
+                if ($this->max_chunk_size_protection && ($wlen > 1024)) {
                     $wlen = 1024;
                 }
 
