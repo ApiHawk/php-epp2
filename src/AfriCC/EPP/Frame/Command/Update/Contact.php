@@ -123,7 +123,7 @@ class Contact extends UpdateCommand
     public function changeOrganization($org, $type = 'loc')
     {
         $this->set(
-            sprintf('contact:chg/postalInfo[@type=\'%s\']/contact:org', $type),
+            sprintf('contact:chg/contact:postalInfo[@type=\'%s\']/contact:org', $type),
             $org
         );
     }
@@ -133,7 +133,7 @@ class Contact extends UpdateCommand
     {
         $this->set(
             sprintf(
-                'contact:chg/postalInfo[@type=\'%s\']/contact:registernumber',
+                'contact:chg/contact:postalInfo[@type=\'%s\']/contact:registernumber',
                 $type
             ), $register_number
         );
@@ -143,7 +143,7 @@ class Contact extends UpdateCommand
     {
         $this->set(
             sprintf(
-                'contact:chg/postalInfo[@type=\'%s\']/contact:firstname',
+                'contact:chg/contact:postalInfo[@type=\'%s\']/contact:firstname',
                 $type
             ), $first_name
         );
@@ -153,7 +153,7 @@ class Contact extends UpdateCommand
     {
         $this->set(
             sprintf(
-                'contact:chg/postalInfo[@type=\'%s\']/contact:lastname',
+                'contact:chg/contact:postalInfo[@type=\'%s\']/contact:lastname',
                 $type
             ), $last_name
         );
@@ -163,7 +163,7 @@ class Contact extends UpdateCommand
     {
         $this->set(
             sprintf(
-                'contact:chg/postalInfo[@type=\'%s\']/contact:isfinnish',
+                'contact:chg/contact:postalInfo[@type=\'%s\']/contact:isfinnish',
                 $type
             ), $is_finnish
         );
@@ -173,7 +173,7 @@ class Contact extends UpdateCommand
     {
         $this->set(
             sprintf(
-                'contact:chg/postalInfo[@type=\'%s\']/contact:birthDate',
+                'contact:chg/contact:postalInfo[@type=\'%s\']/contact:birthDate',
                 $type
             ), $birth_date
         );
@@ -183,7 +183,7 @@ class Contact extends UpdateCommand
     {
         $this->set(
             sprintf(
-                'contact:chg/postalInfo[@type=\'%s\']/contact:addr/contact:street[]',
+                'contact:chg/contact:postalInfo[@type=\'%s\']/contact:addr/contact:street[]',
                 $type
             ), $street
         );
@@ -193,7 +193,7 @@ class Contact extends UpdateCommand
     {
         $this->set(
             sprintf(
-                'contact:chg/postalInfo[@type=\'%s\']/contact:addr/contact:city',
+                'contact:chg/contact:postalInfo[@type=\'%s\']/contact:addr/contact:city',
                 $type
             ), $city
         );
@@ -203,7 +203,7 @@ class Contact extends UpdateCommand
     {
         $this->set(
             sprintf(
-                'contact:chg/postalInfo[@type=\'%s\']/contact:addr/contact:pc',
+                'contact:chg/contact:postalInfo[@type=\'%s\']/contact:addr/contact:pc',
                 $type
             ), $postal_code
         );
@@ -213,7 +213,7 @@ class Contact extends UpdateCommand
     {
         $this->set(
             sprintf(
-                'contact:chg/postalInfo[@type=\'%s\']/contact:addr/contact:cc',
+                'contact:chg/contact:postalInfo[@type=\'%s\']/contact:addr/contact:cc',
                 $type
             ), $country_code
         );
@@ -222,7 +222,7 @@ class Contact extends UpdateCommand
     public function changeVoice($voice)
     {
         $this->set(
-            'contact:chg/voice', $voice
+            'contact:chg/contact:voice', $voice
         );
     }
 
@@ -233,7 +233,7 @@ class Contact extends UpdateCommand
 
     public function changeLegalEmail($legal_email)
     {
-        $this->set('contact:chg/legalemail', $legal_email);
+        $this->set('contact:chg/contact:legalemail', $legal_email);
     }
 
     public function changeDisclose($value, $flag = 0)
