@@ -32,8 +32,7 @@ class Random
 
     public static function auth($len)
     {
-        $rand = mcrypt_create_iv($len, MCRYPT_DEV_URANDOM);
-        $rand = base64_encode($rand);
+        $rand = base64_encode(random_bytes($len));
         return substr(rtrim($rand, '='), 0, $len);
     }
 }
