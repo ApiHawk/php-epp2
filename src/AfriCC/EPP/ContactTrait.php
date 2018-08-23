@@ -200,9 +200,7 @@ trait ContactTrait
 
     public function appendLegalEmail($path, $email)
     {
-        $email = Validator::isEmail($email);
-
-        if (!$email) {
+        if (!Validator::isEmail($email)) {
             throw new Exception(sprintf('%s is not a valid contact type', $email));
         }
 

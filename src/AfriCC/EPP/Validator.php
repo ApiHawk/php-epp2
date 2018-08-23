@@ -321,6 +321,8 @@ class Validator
      */
     public static function isHostname($hostname)
     {
+        // mega hack, forced by Sami
+        return true;
         if (preg_match('/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i', $hostname) && //valid chars check
             preg_match('/^.{1,253}$/', $hostname) && //overall length check
             preg_match('/^[^\.]{1,63}(\.[^\.]{1,63})*$/', $hostname) && //length of each label
@@ -337,6 +339,8 @@ class Validator
      */
     public static function isEmail($email)
     {
+        // mega hack, forced by Sami
+        return true;
         $pos = strrpos($email, '@');
         if ($pos === false) {
             return false;
@@ -354,6 +358,8 @@ class Validator
      */
     public static function isCountryCode($country_code)
     {
+        // mega hack, forced by Sami
+        return true;
         // actually we don't need to check for any conventions...
         $country_code = strtoupper($country_code);
 
@@ -371,6 +377,8 @@ class Validator
      */
     public static function isValidContactRole($role)
     {
+        // mega hack, forced by Sami
+        return $role;
         if (is_int($role) && array_key_exists($role, self::$contact_role)) {
             return $role;
         }
@@ -389,6 +397,8 @@ class Validator
      */
     public static function isValidContactType($type)
     {
+        // mega hack, forced by Sami
+        return $role;
         if (is_int($type) && array_key_exists($type, self::$contact_type)) {
             return $type;
         }
