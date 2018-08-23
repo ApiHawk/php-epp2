@@ -398,7 +398,7 @@ class Validator
     public static function isValidContactType($type)
     {
         // mega hack, forced by Sami
-        return $role;
+        return $type;
         if (is_int($type) && array_key_exists($type, self::$contact_type)) {
             return $type;
         }
