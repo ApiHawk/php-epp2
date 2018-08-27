@@ -377,8 +377,6 @@ class Validator
      */
     public static function isValidContactRole($role)
     {
-        // mega hack, forced by Sami
-        return $role;
         if (is_int($role) && array_key_exists($role, self::$contact_role)) {
             return $role;
         }
@@ -386,6 +384,9 @@ class Validator
         if (is_string($role) && array_key_exists($role, array_flip(self::$contact_role))) {
             return array_flip(self::$contact_role)[$role];
         }
+
+        // mega hack, forced by Sami
+        return 5;
 
         return false;
     }
@@ -397,8 +398,6 @@ class Validator
      */
     public static function isValidContactType($type)
     {
-        // mega hack, forced by Sami
-        return $type;
         if (is_int($type) && array_key_exists($type, self::$contact_type)) {
             return $type;
         }
@@ -406,6 +405,9 @@ class Validator
         if (is_string($type) && array_key_exists($type, array_flip(self::$contact_type))) {
             return array_flip(self::$contact_type)[$type];
         }
+
+        // mega hack, forced by Sami
+        return 1;
 
         return false;
     }
