@@ -12,6 +12,7 @@
 namespace AfriCC\EPP\Frame\Command\Create;
 
 use AfriCC\EPP\Frame\Command\Create as CreateCommand;
+use AfriCC\EPP\ObjectSpec;
 use AfriCC\EPP\Validator;
 use AfriCC\EPP\Random;
 use AfriCC\EPP\PeriodTrait;
@@ -82,6 +83,7 @@ class Domain extends CreateCommand
 
         $this->set('domain:authInfo/domain:pw', $pw);
     }
+
     /**
      * Add SecDNS dsData - RFC 5910
      *
@@ -93,7 +95,7 @@ class Domain extends CreateCommand
     public function addSecDNSdsData($keyTag, $alg, $digestType, $digest)
     {
         $node = $this->set('//epp:epp/epp:command/epp:extension/secDNS:create/secDNS:dsData[]');
-        $ns = $this->objectSpec->xmlns('secDNS');
+        $ns = ObjectSpec::xmlns('secDNS');
         $keyTagNode = $this->createElementNS($ns, 'secDNS:keyTag', $keyTag);
         $algNode = $this->createElementNS($ns, 'secDNS:alg', $alg);
         $digestTypeNode = $this->createElementNS($ns, 'secDNS:digestType', $digestType);
