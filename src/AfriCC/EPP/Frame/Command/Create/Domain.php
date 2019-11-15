@@ -82,4 +82,25 @@ class Domain extends CreateCommand
 
         $this->set('domain:authInfo/domain:pw', $pw);
     }
+    /**
+     * Add SecDNS dsData - RFC 5910
+     *
+     * @param int $keyTag
+     * @param int $alg
+     * @param int $digestType
+     * @param string $digest
+     */
+    public function addSecDNSdsData($keyTag, $alg, $digestType, $digest)
+    {
+        $node = $this->set('//epp:epp/epp:command/epp:extension/secDNS:create/secDNS:dsData[]');
+        $ns = $this->objectSpec->xmlns('secDNS');
+        $keyTagNode = $this->createElementNS($ns, 'secDNS:keyTag', $keyTag);
+        $algNode = $this->createElementNS($ns, 'secDNS:alg', $alg);
+        $digestTypeNode = $this->createElementNS($ns, 'secDNS:digestType', $digestType);
+        $digestNode = $this->createElementNS($ns, 'secDNS:digest', $digest);
+        $node->appendChild($keyTagNode);
+        $node->appendChild($algNode);
+        $node->appendChild($digestTypeNode);
+        $node->appendChild($digestNode);
+    }
 }
