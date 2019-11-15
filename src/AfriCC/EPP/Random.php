@@ -27,12 +27,22 @@ class Random
         if ($prefix !== '') {
             $prefix .= '-';
         }
-        return substr(uniqid($prefix), -$max_length);
+        return substr(uniqid($prefix), 0, $max_length);
     }
 
     public static function auth($len)
     {
-        $rand = base64_encode(random_bytes($len));
-        return substr(rtrim($rand, '='), 0, $len);
+       if (function_exists('random_bytes')) {
+         $rand = base64_encode($rand);		             
+         $randomBytes = random_bytes($len);
+         return substr(rtrim($rand, '='), 0, $len);		         
+       } elseif (function_exists('openssl_random_pseudo_bytes')) {
+             $randomBytes = openssl_random_pseudo_bytes($len);
+         } else {
+             $randomBytes = mcrypt_create_iv($len, MCRYPT_DEV_URANDOM);
+         }
+
+         $randomBytes = base64_encode($randomBytes);
+         return substr(rtrim($randomBytes, '='), 0, $len);
     }
 }
